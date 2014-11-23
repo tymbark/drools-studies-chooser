@@ -25,5 +25,11 @@ public class Question6 extends AbstractQuestion {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	int getIndex() {
+		// TODO Auto-generated method stub
+		return 6;
+	}
 	
 }

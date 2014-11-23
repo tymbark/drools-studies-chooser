@@ -27,6 +27,7 @@ public class AppWindow implements ChangePageListener {
 	private ArrayList<JFrame> questionList;
 	private SummaryFrame summaryFrame;
 	private StartFrame startFrame;
+	private DataGatherer dataGatherer;
 	
 	private int questionCounter = 0;
 
@@ -81,6 +82,15 @@ public class AppWindow implements ChangePageListener {
 	@Override
 	public void exit() {
 		hideFrame(summaryFrame);
+	}
+
+	public void setDataGatherer(DataGatherer _dataGatherer) {
+		dataGatherer = _dataGatherer;
+	}
+
+	@Override
+	public void addAnswer(int index, int data) {
+		dataGatherer.addAnswer(index, data);
 	}
 
 }

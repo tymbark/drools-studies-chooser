@@ -19,7 +19,9 @@ public class DroolsTest {
 
     public static final void main(String[] args) {
         try {
+        	DataGatherer dataGatherer = new DataGatherer();
         	AppWindow window = new AppWindow();
+        	window.setDataGatherer(dataGatherer);
             // load up the knowledge base
             KnowledgeBase kbase = readKnowledgeBase();
             StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();

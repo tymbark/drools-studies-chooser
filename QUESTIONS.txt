@@ -1,0 +1,29 @@
+	pytania:
+
+1. Bardziej uwa¿asz siê za
+		  		score
+   a) humaniste     		0
+   b) umys³ œcis³y		1
+   c) mieszankê a i b           2
+   d) nie wiem    		3 
+
+---------------------------------
+
+2. Pojêcia "równanie ró¿niczkowe, ca³ka, funkcja kwadratowa"
+		  		score
+   a) wywo³uj¹ u mnie dreszcze	0
+   b) intryguj¹ mnie            1
+   c) nie maj¹ na mnie wp³ywu   2
+   d) s¹ dla mnie banalne       3
+
+---------------------------------
+
+4. Pojêcia "równanie ró¿niczkowe, ca³ka, funkcja kwadratowa"
+		  		score
+   a) wywo³uj¹ u mnie dreszcze	0
+   b) intryguj¹ mnie            1
+   c) nie maj¹ na mnie wp³ywu   2
+   d) s¹ dla mnie banalne       3
+
+
+5. 

@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import com.sample.AppWindow;
+import com.sample.ChangePageListener;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -19,18 +20,19 @@ import java.awt.Font;
 public abstract class AbstractQuestion extends JFrame {
 
 	protected JPanel contentPane;
-	protected AppWindow onChangePageListener;
+	protected ChangePageListener onChangePageListener;
 	protected JLabel questionTitle;
 	protected JLabel questionSubtitle;
+	private int questionIndex;
 
-	public AbstractQuestion(AppWindow appWindow ) {
+	public AbstractQuestion(ChangePageListener changePageListener ) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		onChangePageListener = appWindow;
+		onChangePageListener = changePageListener;
 		
 		JButton btnNext = new JButton("NEXT");
 		btnNext.addActionListener(new ActionListener() {
@@ -39,7 +41,7 @@ public abstract class AbstractQuestion extends JFrame {
 					return;
 				}
 				onChangePageListener.nextPage();
-				System.out.println("sel:" + getData());
+				onChangePageListener.addAnswer(getIndex(), getData());
 			}
 		});
 		btnNext.setBounds(335, 228, 89, 23);
@@ -62,4 +64,6 @@ public abstract class AbstractQuestion extends JFrame {
 	abstract void setSubtitle();
 	
 	abstract int getData();
+	
+	abstract int getIndex();
 }

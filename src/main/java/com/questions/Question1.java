@@ -55,4 +55,9 @@ public class Question1 extends AbstractQuestion {
 		}
 	}
 
+	@Override
+	int getIndex() {
+		return 1;
+	}
+
 }
