@@ -17,11 +17,15 @@ import org.drools.runtime.StatefulKnowledgeSession;
  */
 public class DroolsTest {
 
+	public static int NUMBER_OF_QUESTIONS = 6;
+	
     public static final void main(String[] args) {
         try {
         	DataGatherer dataGatherer = new DataGatherer();
+        	QuestionPicker questionPicker = new QuestionPicker();
         	AppWindow window = new AppWindow();
         	window.setDataGatherer(dataGatherer);
+        	window.setQuestionPicker(questionPicker);
             // load up the knowledge base
             KnowledgeBase kbase = readKnowledgeBase();
             StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
