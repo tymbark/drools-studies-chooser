@@ -40,8 +40,8 @@ public abstract class AbstractQuestion extends JFrame {
 				if (getData() == -1) {
 					return;
 				}
-				onChangePageListener.nextPage();
 				onChangePageListener.addAnswer(getIndex(), getData());
+				onChangePageListener.nextPage();
 			}
 		});
 		btnNext.setBounds(335, 228, 89, 23);

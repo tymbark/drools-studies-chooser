@@ -1,20 +1,78 @@
 package com.sample
  
 import com.sample.DroolsTest.Message;
- 
-rule "Hello World"
+import com.sample.Answer;
+import com.sample.QuestionPicker;
+
+rule "start_question"
     when
-        m : Message( status == Message.HELLO, myMessage : message )
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == false)
+        //Answer(qID == 1 && answer == 1)
     then
-        System.out.println( myMessage );
-        m.setMessage( "Goodbye cruel world" );
-        m.setStatus( Message.GOODBYE );
-        update( m );
+        System.out.println("RULE: start_question");
+        questionPicker.setHasStarted(true);
+        questionPicker.addNextQuestion("START_QUESTION");
 end
 
-rule "GoodBye"
+//========================SCI========================
+
+rule "SCI_LEVEL1_Q1"
     when
-        Message( status == Message.GOODBYE, myMessage : message )
+        Answer(qID == 0 || answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
     then
-        System.out.println( myMessage );
+        System.out.println("RULE: SCI_LEVEL1_Q1");
+        questionPicker.addNextQuestion("SCI_LEVEL1_Q1");
+end
+
+rule "SCI_LEVEL2_Q1"
+    when
+        Answer(qID == 0 || answer == 0)
+        Answer(qID == 1 || answer == 0)
+    then
+        System.out.println("RULE: SCI_LEVEL2_Q1");
+end
+
+rule "SCI_LEVEL2_Q2"
+    when
+        Answer(qID == 0 || answer == 0)
+        Answer(qID == 1 || answer == 1)
+    then
+        System.out.println("RULE: SCI_LEVEL2_Q2");
+end
+
+rule "SCI_LEVEL3_Q1"
+    when
+        Answer(qID == 0 || answer == 0)
+        Answer(qID == 1 || answer == 0)
+        Answer(qID == 2 || answer == 0)
+    then
+        System.out.println("SCI_LEVEL3_Q1");
+end
+
+rule "SCI_LEVEL3_Q2"
+    when
+        Answer(qID == 0 || answer == 0)
+        Answer(qID == 1 || answer == 1)
+        Answer(qID == 2 || answer == 0)
+    then
+        System.out.println("SCI_LEVEL3_Q2");
+end
+
+rule "SCI_LEVEL3_Q3"
+    when
+        Answer(qID == 0 || answer == 0)
+        Answer(qID == 1 || answer == 1)
+    then
+        System.out.println("SCI_LEVEL3_Q2");
+end
+
+rule "SCI_LEVEL3_Q4"
+    when
+        Answer(qID == 0 || answer == 0)
+        Answer(qID == 1 || answer == 1)
+    then
+        System.out.println("SCI_LEVEL3_Q2");
 end

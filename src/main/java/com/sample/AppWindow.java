@@ -62,7 +62,7 @@ public class AppWindow implements ChangePageListener {
 
 	public void moveToNextQuestion() {
 		hideFrame(currentFrame);
-		final int nextQuestionIndex = questionPicker.getNextQuestion();
+		final int nextQuestionIndex = questionPicker.getNextQuestionIndex();
 		switch (nextQuestionIndex) {
 		case -1:
 			showFrame(summaryFrame);

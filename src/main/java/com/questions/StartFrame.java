@@ -46,5 +46,4 @@ public class StartFrame extends JFrame {
 		questionTitle.setBounds(10, 90, 414, 14);
 		contentPane.add(questionTitle);
 	}
-	
 }

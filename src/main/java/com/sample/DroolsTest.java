@@ -22,25 +22,22 @@ public class DroolsTest {
     public static final void main(String[] args) {
     	DataGatherer dataGatherer = new DataGatherer();
     	QuestionPicker questionPicker = new QuestionPicker();
-    	AppWindow window = new AppWindow();
-    	window.setDataGatherer(dataGatherer);
-    	window.setQuestionPicker(questionPicker);
-    	
+
         try {
-            // load up the knowledge base
             KnowledgeBase kbase = readKnowledgeBase();
             StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
             KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "test");
-            // go !
-            Message message = new Message();
-            message.setMessage("Hello World");
-            message.setStatus(Message.HELLO);
-            ksession.insert(message);
+            dataGatherer.setKnowledgeSession(ksession);
+            ksession.insert(questionPicker);
             ksession.fireAllRules();
             logger.close();
         } catch (Throwable t) {
             t.printStackTrace();
         }
+        
+        AppWindow window = new AppWindow();
+    	window.setDataGatherer(dataGatherer);
+    	window.setQuestionPicker(questionPicker);
     }
 
     private static KnowledgeBase readKnowledgeBase() throws Exception {
