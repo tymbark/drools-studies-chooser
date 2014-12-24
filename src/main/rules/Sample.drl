@@ -1,16 +1,15 @@
-package com.sample
- 
-import com.sample.DroolsTest.Message;
-import com.sample.Answer;
-import com.sample.QuestionPicker;
+package source
+
+import questions.Answer;
+import questions.QuestionPicker;
 
 rule "start_question"
     when
     	questionPicker : QuestionPicker()
     	QuestionPicker (hasStarted == false)
-        //Answer(qID == 1 && answer == 1)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (level == 0)
     then
-        System.out.println("RULE: start_question");
         questionPicker.setHasStarted(true);
         questionPicker.addNextQuestion("START_QUESTION");
 end
@@ -19,60 +18,887 @@ end
 
 rule "SCI_LEVEL1_Q1"
     when
-        Answer(qID == 0 || answer == 0)
+        Answer(qID == 0 && answer == 0)
     	questionPicker : QuestionPicker()
     	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 1)
     then
-        System.out.println("RULE: SCI_LEVEL1_Q1");
         questionPicker.addNextQuestion("SCI_LEVEL1_Q1");
 end
 
 rule "SCI_LEVEL2_Q1"
     when
-        Answer(qID == 0 || answer == 0)
-        Answer(qID == 1 || answer == 0)
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 2)
     then
-        System.out.println("RULE: SCI_LEVEL2_Q1");
+        questionPicker.addNextQuestion("SCI_LEVEL2_Q1");
 end
 
 rule "SCI_LEVEL2_Q2"
     when
-        Answer(qID == 0 || answer == 0)
-        Answer(qID == 1 || answer == 1)
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 2)
     then
-        System.out.println("RULE: SCI_LEVEL2_Q2");
+        questionPicker.addNextQuestion("SCI_LEVEL2_Q2");
 end
 
 rule "SCI_LEVEL3_Q1"
     when
-        Answer(qID == 0 || answer == 0)
-        Answer(qID == 1 || answer == 0)
-        Answer(qID == 2 || answer == 0)
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
     then
-        System.out.println("SCI_LEVEL3_Q1");
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_LEVEL3_Q1");
 end
 
 rule "SCI_LEVEL3_Q2"
     when
-        Answer(qID == 0 || answer == 0)
-        Answer(qID == 1 || answer == 1)
-        Answer(qID == 2 || answer == 0)
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
     then
-        System.out.println("SCI_LEVEL3_Q2");
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_LEVEL3_Q2");
 end
 
 rule "SCI_LEVEL3_Q3"
     when
-        Answer(qID == 0 || answer == 0)
-        Answer(qID == 1 || answer == 1)
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
     then
-        System.out.println("SCI_LEVEL3_Q2");
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_LEVEL3_Q3");
 end
 
 rule "SCI_LEVEL3_Q4"
     when
-        Answer(qID == 0 || answer == 0)
-        Answer(qID == 1 || answer == 1)
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
     then
-        System.out.println("SCI_LEVEL3_Q2");
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_LEVEL3_Q4");
+end
+
+rule "SCI_EIT"
+    when
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_EIT");
+end
+
+rule "SCI_AUTOMATYKA"
+    when
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_AUTOMATYKA");
+end
+
+rule "SCI_BIOINF"
+    when
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_BIOINF");
+end
+
+rule "SCI_INFORMATYKA"
+    when
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_INFORMATYKA");
+end
+
+rule "SCI_FIZYKA"
+    when
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_FIZYKA");
+end
+
+rule "SCI_MATEMATYKA"
+    when
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_MATEMATYKA");
+end
+
+rule "SCI_BUDOWNICTWO"
+    when
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_BUDOWNICTWO");
+end
+
+rule "SCI_MECHANIKA"
+    when
+        Answer(qID == 0 && answer == 0)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("SCI_MECHANIKA");
+end
+
+//========================HUM========================
+
+rule "HUM_LEVEL1_Q1"
+    when
+        Answer(qID == 0 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 1)
+    then
+        questionPicker.addNextQuestion("HUM_LEVEL1_Q1");
+end
+
+rule "HUM_LEVEL2_Q1"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 2)
+    then
+        questionPicker.addNextQuestion("HUM_LEVEL2_Q1");
+end
+
+rule "HUM_LEVEL2_Q2"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 2)
+    then
+        questionPicker.addNextQuestion("HUM_LEVEL2_Q2");
+end
+
+rule "HUM_LEVEL3_Q1"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_LEVEL3_Q1");
+end
+
+rule "HUM_LEVEL3_Q2"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_LEVEL3_Q2");
+end
+
+rule "HUM_LEVEL3_Q3"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_LEVEL3_Q3");
+end
+
+rule "HUM_LEVEL3_Q4"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_LEVEL3_Q4");
+end
+
+rule "HUM_EIT"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_MALARSTWO");
+end
+
+rule "HUM_AUTOMATYKA"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_ARCHITEKTURA");
+end
+
+rule "HUM_BIOINF"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_MUZYKA");
+end
+
+rule "HUM_INFORMATYKA"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_RZEZBA");
+end
+
+rule "HUM_FIZYKA"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_FILOLOGIA_X");
+end
+
+rule "HUM_MATEMATYKA"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_FILOLOGIA_PL");
+end
+
+rule "HUM_BUDOWNICTWO"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_PSYCHOLOGIA");
+end
+
+rule "HUM_MECHANIKA"
+    when
+        Answer(qID == 0 && answer == 1)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("HUM_FILOZOFIA");
+end
+
+//========================NON========================
+
+rule "NON_LEVEL1_Q1"
+    when
+        Answer(qID == 0 && answer == 2)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 1)
+    then
+        questionPicker.addNextQuestion("NON_LEVEL1_Q1");
+end
+
+rule "NON_LEVEL2_Q1"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 2)
+    then
+        questionPicker.addNextQuestion("NON_LEVEL2_Q1");
+end
+
+rule "NON_LEVEL2_Q2"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 2)
+    then
+        questionPicker.addNextQuestion("NON_LEVEL2_Q2");
+end
+
+rule "NON_LEVEL3_Q1"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
+    then
+        questionPicker.addNextQuestion("NON_LEVEL3_Q1");
+end
+
+rule "NON_LEVEL3_Q2"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
+    then
+        questionPicker.addNextQuestion("NON_LEVEL3_Q2");
+end
+
+rule "NON_LEVEL3_Q3"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
+    then
+        questionPicker.addNextQuestion("NON_LEVEL3_Q3");
+end
+
+rule "NON_LEVEL3_Q4"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 3)
+    then
+        questionPicker.addNextQuestion("NON_LEVEL3_Q4");
+end
+
+
+rule "NON_LEVEL4_Q1"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 4)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_LEVEL4_Q1");
+end
+
+rule "NON_LEVEL4_Q2"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 4)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_LEVEL4_Q2");
+end
+
+rule "NON_LEVEL4_Q3"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 4)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_LEVEL4_Q3");
+end
+
+rule "NON_LEVEL4_Q4"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 4)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_LEVEL4_Q4");
+end
+
+rule "NON_LEVEL4_Q5"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 4)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_LEVEL4_Q5");
+end
+
+rule "NON_LEVEL4_Q6"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 4)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_LEVEL4_Q6");
+end
+
+rule "NON_LEVEL4_Q7"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 4)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_LEVEL4_Q7");
+end
+
+rule "NON_LEVEL4_Q8"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasStarted == true)
+    	QuestionPicker (hasEnded == false)
+    	QuestionPicker (hasPicked == false)
+    	QuestionPicker (level == 4)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_LEVEL4_Q8");
+end
+rule "NON_MEDYCYNA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 0)
+        Answer(qID == 4 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_MEDYCYNA");
+end
+
+rule "NON_FIZJOTERAPIA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 0)
+        Answer(qID == 4 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_FIZJOTERAPIA");
+end
+
+rule "NON_WETERYNARIA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 1)
+        Answer(qID == 4 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_WETERYNARIA");
+end
+
+rule "NON_FARMACJA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 1)
+        Answer(qID == 4 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_FARMACJA");
+end
+
+rule "NON_PRAWO"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 0)
+        Answer(qID == 4 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_PRAWO");
+end
+
+rule "NON_HISTORIA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 0)
+        Answer(qID == 4 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_HISTORIA");
+end
+
+rule "NON_EKONOMIA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 1)
+        Answer(qID == 4 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_EKONOMIA");
+end
+
+rule "NON_CHEMIA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 0)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 1)
+        Answer(qID == 4 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_CHEMIA");
+end
+
+
+rule "NON_BIOLOGIA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 0)
+        Answer(qID == 4 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_BIOLOGIA");
+end
+
+rule "NON_GEOGRAFIA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 0)
+        Answer(qID == 4 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_GEOGRAFIA");
+end
+
+rule "NON_EKOLOGIA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 1)
+        Answer(qID == 4 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_EKOLOGIA");
+end
+
+rule "NON_ROLNICTWO"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 0)
+        Answer(qID == 3 && answer == 1)
+        Answer(qID == 4 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_ROLNICTWO");
+end
+
+rule "NON_EUROPEISTYKA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 0)
+        Answer(qID == 4 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_EUROPEISTYKA");
+end
+
+rule "NON_STOSUNKI"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 0)
+        Answer(qID == 4 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_STOSUNKI");
+end
+
+rule "NON_ZARZADZANIE"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 1)
+        Answer(qID == 4 && answer == 0)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_ZARZADZANIE");
+end
+
+rule "NON_SOCJOLOGIA"
+    when
+        Answer(qID == 0 && answer == 2)
+        Answer(qID == 1 && answer == 1)
+        Answer(qID == 2 && answer == 1)
+        Answer(qID == 3 && answer == 1)
+        Answer(qID == 4 && answer == 1)
+    	questionPicker : QuestionPicker()
+    	QuestionPicker (hasEnded == true)
+    	QuestionPicker (hasPicked == false)
+    then
+    	questionPicker.setHasEnded(true);
+        questionPicker.addNextQuestion("NON_SOCJOLOGIA");
 end

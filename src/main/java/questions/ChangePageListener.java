@@ -1,4 +1,4 @@
-package com.sample;
+package questions;
 
 public interface ChangePageListener {
 
@@ -8,5 +8,5 @@ public interface ChangePageListener {
 
 	public void exit();
 
-	public void addAnswer(int index, int data);
+	public void addAnswer(int data);
 }

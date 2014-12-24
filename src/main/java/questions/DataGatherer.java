@@ -1,26 +1,29 @@
-package com.sample;
+package questions;
 
 import java.util.ArrayList;
 
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.drools.runtime.rule.FactHandle;
 
 public class DataGatherer {
 	
 	private ArrayList<Answer> answers;
 	private StatefulKnowledgeSession ksession;
+	private int answerCounter = 0;
 	
 	public DataGatherer() {
 		answers = new ArrayList<>();
 	}
 	
-	public void addAnswer(int questionIndex, int answer) {
-		Answer a = new Answer(questionIndex, answer);
+	public void addAnswerAndFire(int answerOption) {
+		Answer a = new Answer(answerCounter, answerOption);
 		answers.add(a);
 		if (ksession != null) {
 			ksession.insert(a);
-			System.out.println("Answer added:"+answer+" "+questionIndex);
-			System.out.println("All rules launched...");
+			System.out.println("DG: Question:" + answerCounter + " Answer added:" + answerOption);
+			System.out.println("DG: All rules launched...");
 			ksession.fireAllRules();
+			answerCounter++;
 		} else {
 			System.out.println("Error: KnowledgeSession not linked");
 			System.exit(0);
@@ -36,5 +39,9 @@ public class DataGatherer {
 	public void setKnowledgeSession(StatefulKnowledgeSession _ksession) {
 		ksession = _ksession;
 		System.out.println("KnowledgeSession linked to data gatherer");
+	}
+
+	public void update(QuestionPicker questionPicker) {
+		ksession.update(questionPicker.getHandle(), questionPicker);
 	}
 }

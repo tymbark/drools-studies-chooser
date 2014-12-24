@@ -1,4 +1,4 @@
-package com.sample;
+package source;
 
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
@@ -11,31 +11,31 @@ import org.drools.io.ResourceFactory;
 import org.drools.logger.KnowledgeRuntimeLogger;
 import org.drools.logger.KnowledgeRuntimeLoggerFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.drools.runtime.rule.FactHandle;
 
-/**
- * This is a sample class to launch a rule.
- */
-public class DroolsTest {
+import questions.DataGatherer;
+import questions.QuestionPicker;
 
-	public static int NUMBER_OF_QUESTIONS = 6;
+public class MainClass {
 	
     public static final void main(String[] args) {
     	DataGatherer dataGatherer = new DataGatherer();
     	QuestionPicker questionPicker = new QuestionPicker();
+    	questionPicker.addDataGatherer(dataGatherer);
 
         try {
             KnowledgeBase kbase = readKnowledgeBase();
             StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
             KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "test");
             dataGatherer.setKnowledgeSession(ksession);
-            ksession.insert(questionPicker);
+            questionPicker.setHandle(ksession.insert(questionPicker));
             ksession.fireAllRules();
             logger.close();
         } catch (Throwable t) {
             t.printStackTrace();
         }
         
-        AppWindow window = new AppWindow();
+        WindowManager window = new WindowManager();
     	window.setDataGatherer(dataGatherer);
     	window.setQuestionPicker(questionPicker);
     }
@@ -54,32 +54,4 @@ public class DroolsTest {
         kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
         return kbase;
     }
-
-    public static class Message {
-
-        public static final int HELLO = 0;
-        public static final int GOODBYE = 1;
-
-        private String message;
-
-        private int status;
-
-        public String getMessage() {
-            return this.message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public int getStatus() {
-            return this.status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
-        }
-
-    }
-
 }

@@ -1,4 +1,4 @@
-package com.sample;
+package source;
 
 import java.awt.Font;
 import java.util.ArrayList;
@@ -7,16 +7,19 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import com.questions.Question1;
-import com.questions.Question2;
-import com.questions.Question3;
-import com.questions.Question4;
-import com.questions.Question5;
-import com.questions.Question6;
-import com.questions.StartFrame;
-import com.questions.SummaryFrame;
+import org.drools.runtime.rule.FactHandle;
 
-public class AppWindow implements ChangePageListener {
+import questions.ChangePageListener;
+import questions.DataGatherer;
+import questions.QuestionPicker;
+import questions.DataHelper;
+import questions.DataHelper.Question;
+import layout.Question_2_Options;
+import layout.Question_3_Options;
+import layout.StartFrame;
+import layout.SummaryFrame;
+
+public class WindowManager implements ChangePageListener {
 
 	final int width = 450;
 	final int height = 450;
@@ -27,26 +30,18 @@ public class AppWindow implements ChangePageListener {
 	private StartFrame startFrame;
 	private DataGatherer dataGatherer;
 	private QuestionPicker questionPicker;
+	private DataHelper questionsHelper;
 
-	public AppWindow() {
+	public WindowManager() {
 		initQuestions();
 		showFrame(startFrame);
+		questionsHelper = new DataHelper();
 	}
 
 	private void initQuestions() {
 		questionList = new ArrayList<>();
-		questionList.add(new Question1(this));
-		questionList.add(new Question2(this));
-		questionList.add(new Question3(this));
-		questionList.add(new Question4(this));
-		questionList.add(new Question5(this));
-		questionList.add(new Question6(this));
 		summaryFrame = new SummaryFrame(this);
 		startFrame = new StartFrame(this);
-		if (questionList.size() != DroolsTest.NUMBER_OF_QUESTIONS) {
-			System.out.println("Error: not all questions added");
-			System.exit(1);
-		}
 	}
 
 	private void showFrame(JFrame frame) {
@@ -62,15 +57,20 @@ public class AppWindow implements ChangePageListener {
 
 	public void moveToNextQuestion() {
 		hideFrame(currentFrame);
-		final int nextQuestionIndex = questionPicker.getNextQuestionIndex();
-		switch (nextQuestionIndex) {
-		case -1:
-			showFrame(summaryFrame);
+		final String nextQuestionTitle = questionPicker.move();
+		final Question question = (Question) questionsHelper.get(nextQuestionTitle);
+		prepareAndDisplayFrame(question);
+	}
+
+	private void prepareAndDisplayFrame(Question question) {
+		switch(question.getOptions()) {
+		case 2:
+			showFrame(new Question_2_Options(this, question));
 			break;
-		default:
-			showFrame(questionList.get(nextQuestionIndex));
+		case 3:
+			showFrame(new Question_3_Options(this, question));
 			break;
-		}
+		} 
 	}
 
 	@Override
@@ -81,6 +81,7 @@ public class AppWindow implements ChangePageListener {
 	
 	@Override
 	public void nextPage() {
+		hideFrame(currentFrame);
 		moveToNextQuestion();
 	}
 
@@ -94,8 +95,9 @@ public class AppWindow implements ChangePageListener {
 	}
 
 	@Override
-	public void addAnswer(int index, int data) {
-		dataGatherer.addAnswer(index, data);
+	public void addAnswer(int data) {
+		dataGatherer.addAnswerAndFire(data);
+		
 	}
 
 	public void setQuestionPicker(QuestionPicker _questionPicker) {

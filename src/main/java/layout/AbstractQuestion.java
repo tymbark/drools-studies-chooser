@@ -1,4 +1,4 @@
-package com.questions;
+package layout;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -10,8 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.sample.AppWindow;
-import com.sample.ChangePageListener;
+import questions.ChangePageListener;
+import source.WindowManager;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -40,7 +40,7 @@ public abstract class AbstractQuestion extends JFrame {
 				if (getData() == -1) {
 					return;
 				}
-				onChangePageListener.addAnswer(getIndex(), getData());
+				onChangePageListener.addAnswer(getData());
 				onChangePageListener.nextPage();
 			}
 		});
@@ -55,15 +55,10 @@ public abstract class AbstractQuestion extends JFrame {
 		questionSubtitle = new JLabel("subtitle");
 		questionSubtitle.setBounds(10, 45, 414, 14);
 		contentPane.add(questionSubtitle);
-		setTitle();
-		setSubtitle();
 	}
 	
 	abstract void setTitle();
 	
-	abstract void setSubtitle();
-	
 	abstract int getData();
 	
-	abstract int getIndex();
 }

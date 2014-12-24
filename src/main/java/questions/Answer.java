@@ -1,4 +1,4 @@
-package com.sample;
+package questions;
 
 public class Answer {
 

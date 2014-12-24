@@ -1,4 +1,4 @@
-package com.questions;
+package layout;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -10,20 +10,21 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.sample.AppWindow;
-import com.sample.ChangePageListener;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.SwingConstants;
 
-public class StartFrame extends JFrame {
+import questions.ChangePageListener;
+import source.WindowManager;
+
+public class SummaryFrame extends JFrame {
 
 	protected JPanel contentPane;
 	protected ChangePageListener onChangePageListener;
 	protected JLabel questionTitle;
 
-	public StartFrame (AppWindow appWindow ) {
+	public SummaryFrame (WindowManager appWindow ) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -32,18 +33,19 @@ public class StartFrame extends JFrame {
 		contentPane.setLayout(null);
 		onChangePageListener = appWindow;
 		
-		JButton btnNext = new JButton("START");
+		JButton btnNext = new JButton("EXIT");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				onChangePageListener.start();
+				onChangePageListener.exit();
 			}
 		});
-		btnNext.setBounds(174, 150, 89, 23);
+		btnNext.setBounds(177, 228, 89, 23);
 		contentPane.add(btnNext);
 		
-		questionTitle = new JLabel("Test na wyb\u00F3r kierunku studi\u00F3w");
+		questionTitle = new JLabel("Podsumowanie");
 		questionTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		questionTitle.setBounds(10, 90, 414, 14);
+		questionTitle.setBounds(10, 25, 414, 14);
 		contentPane.add(questionTitle);
 	}
+	
 }
