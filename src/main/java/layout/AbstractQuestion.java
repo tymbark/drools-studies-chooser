@@ -21,7 +21,6 @@ public abstract class AbstractQuestion extends JFrame {
 
 	protected JPanel contentPane;
 	protected ChangePageListener onChangePageListener;
-	protected JLabel questionTitle;
 	protected JLabel questionSubtitle;
 	private int questionIndex;
 
@@ -46,11 +45,6 @@ public abstract class AbstractQuestion extends JFrame {
 		});
 		btnNext.setBounds(335, 228, 89, 23);
 		contentPane.add(btnNext);
-		
-		questionTitle = new JLabel("title");
-		questionTitle.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		questionTitle.setBounds(10, 11, 101, 23);
-		contentPane.add(questionTitle);
 		
 		questionSubtitle = new JLabel("subtitle");
 		questionSubtitle.setBounds(10, 45, 414, 14);

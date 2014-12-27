@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 
 import questions.ChangePageListener;
 import source.WindowManager;
+import java.awt.Font;
 
 public class SummaryFrame extends JFrame {
 
@@ -24,7 +25,7 @@ public class SummaryFrame extends JFrame {
 	protected ChangePageListener onChangePageListener;
 	protected JLabel questionTitle;
 
-	public SummaryFrame (WindowManager appWindow ) {
+	public SummaryFrame (WindowManager appWindow, String _title) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -36,16 +37,20 @@ public class SummaryFrame extends JFrame {
 		JButton btnNext = new JButton("EXIT");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				onChangePageListener.exit();
+				System.exit(0);
 			}
 		});
 		btnNext.setBounds(177, 228, 89, 23);
 		contentPane.add(btnNext);
 		
-		questionTitle = new JLabel("Podsumowanie");
+		questionTitle = new JLabel(_title);
 		questionTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		questionTitle.setBounds(10, 25, 414, 14);
+		questionTitle.setBounds(10, 79, 414, 14);
 		contentPane.add(questionTitle);
+		
+		JLabel lblNewLabel = new JLabel("Tw\u00F3j kierunek to:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(163, 22, 137, 23);
+		contentPane.add(lblNewLabel);
 	}
-	
 }

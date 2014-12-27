@@ -11,6 +11,8 @@ import org.drools.runtime.rule.FactHandle;
 
 import questions.ChangePageListener;
 import questions.DataGatherer;
+import questions.DataHelper.Data;
+import questions.DataHelper.Study;
 import questions.QuestionPicker;
 import questions.DataHelper;
 import questions.DataHelper.Question;
@@ -40,7 +42,6 @@ public class WindowManager implements ChangePageListener {
 
 	private void initQuestions() {
 		questionList = new ArrayList<>();
-		summaryFrame = new SummaryFrame(this);
 		startFrame = new StartFrame(this);
 	}
 
@@ -58,8 +59,18 @@ public class WindowManager implements ChangePageListener {
 	public void moveToNextQuestion() {
 		hideFrame(currentFrame);
 		final String nextQuestionTitle = questionPicker.move();
-		final Question question = (Question) questionsHelper.get(nextQuestionTitle);
-		prepareAndDisplayFrame(question);
+		final Data data = questionsHelper.get(nextQuestionTitle);
+		if (data.isStudy()) {
+			final Study study = (Study) data;
+			showLastFrame(study);
+		} else {
+			final Question question = (Question) data;
+			prepareAndDisplayFrame(question);
+		}
+	}
+
+	private void showLastFrame(Study study) {
+		showFrame(new SummaryFrame(this, study.title));
 	}
 
 	private void prepareAndDisplayFrame(Question question) {
