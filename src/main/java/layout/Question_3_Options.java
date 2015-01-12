@@ -11,8 +11,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import main.WindowManager;
 import questions.DataHelper.Question;
-import source.WindowManager;
 
 public class Question_3_Options extends AbstractQuestion {
 

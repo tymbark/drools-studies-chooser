@@ -1,4 +1,4 @@
-package source;
+package main;
 
 import java.awt.Font;
 import java.util.ArrayList;
@@ -76,7 +76,12 @@ public class WindowManager implements ChangePageListener {
 	private void prepareAndDisplayFrame(Question question) {
 		switch(question.getOptions()) {
 		case 2:
+			if (question.TAG.equals("SCI_LEVEL3_Q1")) {
+				question.option0 = "uk³ady scalone";
+				question.option1 = "oprogramowanie";
+			}
 			showFrame(new Question_2_Options(this, question));
+			
 			break;
 		case 3:
 			showFrame(new Question_3_Options(this, question));

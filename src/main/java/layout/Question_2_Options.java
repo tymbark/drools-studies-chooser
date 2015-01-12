@@ -5,8 +5,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.ButtonGroup;
 
+import main.WindowManager;
 import questions.DataHelper.Question;
-import source.WindowManager;
 
 public class Question_2_Options extends AbstractQuestion {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -24,12 +24,12 @@ public class Question_2_Options extends AbstractQuestion {
 		
 		option0 = new JRadioButton();
 		buttonGroup.add(option0);
-		option0.setBounds(6, 72, 109, 23);
+		option0.setBounds(6, 72, 315, 23);
 		getContentPane().add(option0);
 		
 		option1 = new JRadioButton();
 		buttonGroup.add(option1);
-		option1.setBounds(6, 98, 109, 23);
+		option1.setBounds(6, 98, 315, 23);
 		getContentPane().add(option1);
 		setTitle();
 	}

@@ -15,8 +15,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.SwingConstants;
 
+import main.WindowManager;
 import questions.ChangePageListener;
-import source.WindowManager;
 
 public class StartFrame extends JFrame {
 

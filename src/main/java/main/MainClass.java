@@ -1,4 +1,4 @@
-package source;
+package main;
 
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;

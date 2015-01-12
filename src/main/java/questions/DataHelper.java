@@ -27,7 +27,7 @@ public class DataHelper {
 		dataList.add(new Question("HUM_LEVEL3_Q3",	"Czy znasz jakiœ biegle jakiœ jêzyk poza polskim?"));
 		dataList.add(new Question("HUM_LEVEL3_Q4",	"Czy interesuje Ciê mózg cz³owieka?"));
 
-		dataList.add(new Question("NON_LEVEL1_Q1",	"Jak szybko potrafisz wch³aniaæ wiedzê?"));
+		dataList.add(new Question("NON_LEVEL1_Q1",	"Czy potrafisz szybko wch³aniaæ wiedzê?"));
 		dataList.add(new Question("NON_LEVEL2_Q1",	"Czy interesuje Ciê leczenie istot?"));
 		dataList.add(new Question("NON_LEVEL2_Q2",	"Czy interesuje Ciê przyroda?"));
 		dataList.add(new Question("NON_LEVEL3_Q1",	"Czy chcesz pomagaæ ludziom doraŸnie?"));
@@ -38,7 +38,7 @@ public class DataHelper {
 		dataList.add(new Question("NON_LEVEL4_Q2",	"Czy chcesz leczyæ zwierzêta?"));
 		dataList.add(new Question("NON_LEVEL4_Q3", "Czy masz znajomoœci?"));
 		dataList.add(new Question("NON_LEVEL4_Q4",	"Interesuje Ciê gospodarka?"));
-		dataList.add(new Question("NON_LEVEL4_Q5", "Ciekawi Ciê struktura istot ¿ywych?"));
+		dataList.add(new Question("NON_LEVEL4_Q5", "Ciekawi Ciê budowa organizmów?"));
 		dataList.add(new Question("NON_LEVEL4_Q6",	"Czy chcesz chroniæ przyrodê za wszelk¹ cenê?"));
 		dataList.add(new Question("NON_LEVEL4_Q7", "Czy fascynuje Ciê UE?"));
 		dataList.add(new Question("NON_LEVEL4_Q8", "Lubisz rz¹dzæ ludŸmi?"));

@@ -15,8 +15,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.SwingConstants;
 
+import main.WindowManager;
 import questions.ChangePageListener;
-import source.WindowManager;
+
 import java.awt.Font;
 
 public class SummaryFrame extends JFrame {

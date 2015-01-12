@@ -3,33 +3,33 @@
   <type>4</type>
   <activationId>start_question [1, 1, 1, 1]</activationId>
   <rule>start_question</rule>
-  <declarations>questionPicker=questions.QuestionPicker@dbcaa4(1)</declarations>
+  <declarations>questionPicker=questions.QuestionPicker@1c7625c(1)</declarations>
 </org.drools.audit.event.ActivationLogEvent>
 <org.drools.audit.event.ObjectLogEvent>
   <type>1</type>
   <factId>1</factId>
-  <objectToString>questions.QuestionPicker@dbcaa4</objectToString>
+  <objectToString>questions.QuestionPicker@1c7625c</objectToString>
 </org.drools.audit.event.ObjectLogEvent>
 <org.drools.audit.event.ObjectLogEvent>
   <type>2</type>
   <factId>1</factId>
-  <objectToString>questions.QuestionPicker@dbcaa4</objectToString>
+  <objectToString>questions.QuestionPicker@1c7625c</objectToString>
 </org.drools.audit.event.ObjectLogEvent>
 <org.drools.audit.event.ActivationLogEvent>
   <type>6</type>
   <activationId>start_question [1, 1, 1, 1]</activationId>
   <rule>start_question</rule>
-  <declarations>questionPicker=questions.QuestionPicker@dbcaa4(1)</declarations>
+  <declarations>questionPicker=questions.QuestionPicker@1c7625c(1)</declarations>
 </org.drools.audit.event.ActivationLogEvent>
 <org.drools.audit.event.ObjectLogEvent>
   <type>2</type>
   <factId>1</factId>
-  <objectToString>questions.QuestionPicker@dbcaa4</objectToString>
+  <objectToString>questions.QuestionPicker@1c7625c</objectToString>
 </org.drools.audit.event.ObjectLogEvent>
 <org.drools.audit.event.ActivationLogEvent>
   <type>7</type>
   <activationId>start_question [1, 1, 1, 1]</activationId>
   <rule>start_question</rule>
-  <declarations>questionPicker=questions.QuestionPicker@dbcaa4(1)</declarations>
+  <declarations>questionPicker=questions.QuestionPicker@1c7625c(1)</declarations>
 </org.drools.audit.event.ActivationLogEvent>
 </object-stream>

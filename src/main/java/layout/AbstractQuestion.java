@@ -10,8 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import main.WindowManager;
 import questions.ChangePageListener;
-import source.WindowManager;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
